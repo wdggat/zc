@@ -9,7 +9,7 @@ import notifier
 
 #game: hostname, guestname, leaguename, starttime, concede1, concede2, sp ...
 def main():
-    games = [Game(item[0], item[1], item[2], item[3], item[4], item[5], item[6:9], item[9:12]) for item in spider_shengpingfu.spide()]
+    games = [Game(item[0].decode('utf8'), item[1].decode('utf8'), item[2].decode('utf8'), item[3], item[4], item[5], item[6:9], item[9:12]) for item in spider_shengpingfu.spide()]
     for i in range(len(games) - 1):
         catched = []
         g1, g2 = games[i], games[i + 1]
