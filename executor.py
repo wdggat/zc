@@ -9,7 +9,8 @@ import notifier
 
 #game: hostname, guestname, leaguename, starttime, concede1, concede2, sp ...
 def main():
-    games = [Game(item[0].decode('utf8'), item[1].decode('utf8'), item[2].decode('utf8'), item[3], item[4], item[5], item[6:9], item[9:12]) for item in spider_shengpingfu.spide()]
+    print "----JOB BEGIN --- %s ---" % datetime.now()
+    games = [Game(item[0], item[1], item[2], item[3], item[4], item[5], item[6:9], item[9:12]) for item in spider_shengpingfu.spide()]
     for i in range(len(games) - 1):
         catched = []
         g1, g2 = games[i], games[i + 1]
@@ -22,12 +23,13 @@ def main():
 		for p in profits:
 		    print str(p)
 		if len(profits) > 0:
-		    c = "%s - %s\t%s\t%s - %s\t%s -- %s" % (g1.hostname,g1.guestname, str(sp_arra), g2.hostname, g2.guestname, str(sp_arrb), ' ** '.join([str(profit) for profit in profits]))
+		    c = "%s - %s\t%s\t%s - %s\t%s -- %s" % (str(g1.hostname),str(g1.guestname), str(sp_arra), str(g2.hostname), str(g2.guestname), str(sp_arrb), ' ** '.join([str(profit) for profit in profits]))
 		    catched.append(c)
         if len(catched) > 0:
 	    notifier.notify(catched)
 	    print 'Mail send, len(catched): %d' % len(catched)
 	    catched = []
+    print "----JOB END --- %s ---" % datetime.now()
 
 if __name__ == '__main__':
     main()

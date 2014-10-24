@@ -15,6 +15,9 @@ def decode(content):
         hostname = game['hostname'].encode('utf-8')
 	guestname = game['guestname'].encode('utf-8')
 	leaguename = game['leaguename'].encode('utf-8')
+        #hostname = game['hostname']
+	#guestname = game['guestname']
+	#leaguename = game['leaguename']
 	starttime = int(game['starttime']) / 1000
 	#attached_flight.find('span', {'class' : 'base_price'}).text
         col_concede = game.find('span', {'class' : 'co5 towLine'}).findAll('em')
