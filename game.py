@@ -15,4 +15,5 @@ class Game():
 	self.sp_arr2 = sp_arr2
 
     def __str__(self):
-        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (self.hostname, self.guestname, self.leaguename, utils.make_datetime(self.starttime), self.concede1, self.concede2, self.sp_arr1, self.sp_arr2)
+        #return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (self.hostname, self.guestname, self.leaguename, utils.make_datetime(self.starttime), self.concede1, self.concede2, self.sp_arr1, self.sp_arr2)
+        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (str(self.hostname), str(self.guestname), str(self.leaguename), utils.make_datetime(self.starttime), self.concede1, self.concede2, self.sp_arr1, self.sp_arr2)

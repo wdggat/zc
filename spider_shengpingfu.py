@@ -1,6 +1,7 @@
 #!/usr/bin/python 
 
 import re
+import sys
 from bs4 import BeautifulSoup
 import urllib
 
@@ -38,13 +39,20 @@ def decode(content):
 	games.append(g)
     return games
 
-def spide():
-    content = urllib.urlopen(URL).read()
+def spide(debug=False):
+    content = None
+    if not debug:
+        content = urllib.urlopen(URL).read()
+    else:
+        content = ''.join(open('shengpingfu_2s1_20141011.html').readlines())
     return decode(content)
 
 def main():
     #content = open('shengpingfu_2s1_20141011.html')
-    for game in spide():
+    debug = False 
+    if len(sys.argv) == 2:
+        debug = True
+    for game in spide(debug):
         print '\t'.join([str(g) for g in game])
 
 if __name__ == '__main__':
