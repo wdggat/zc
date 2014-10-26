@@ -20,7 +20,7 @@ def compute_profits(games):
     print "----JOB BEGIN --- %s ---" % datetime.now()
     games = [Game(item[0], item[1], item[2], item[3], item[4], item[5], item[6:9], item[9:12]) for item in games]
     for i in range(len(games)):
-        for j in range(i+1, len(games))
+        for j in range(i+1, len(games)):
             catched = []
             g1, g2 = games[i], games[j]
 	    print "----new try --- %s ---" % datetime.now()
