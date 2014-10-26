@@ -97,6 +97,8 @@ def get_topN_profit(sp_arr, topN, profit_multiple=2, buy_max=BUY_MAX, buy_min=0)
     return sorted_profits[0:topN]
 
 def get_topN_profit_2s1(sp_arra, sp_arrb, topN, buy_max=BUY_MAX, buy_min=0):
+    if not check_2s1(sp_arra, sp_arrb):
+        return []
     sp_arr = []
     for sp_a in sp_arra:
         for sp_b in sp_arrb:
@@ -105,3 +107,14 @@ def get_topN_profit_2s1(sp_arra, sp_arrb, topN, buy_max=BUY_MAX, buy_min=0):
     print 'sp_a: %s, sp_b: %s' % (sp_arra, sp_arrb)
     return get_topN_profit(sp_arr, topN, buy_max=buy_max, buy_min=buy_min)
     
+def check_2s1(sp_arra, sp_arrb):
+    if any([i >= 9 for i in sp_arra]) or any([i >=9 for i in sp_arrb]):
+        return False
+    beyond_threshold = 0
+    for i in sp_arra:
+        if i >= 3.6:
+	    beyond_threshold += 1
+    for i in sp_arrb:
+        if i >= 3.6:
+	    beyond_threshold += 1
+    return beyond_threshold >= 3
