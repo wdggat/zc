@@ -12,7 +12,7 @@ mail_pwd = 'testpassword'
 
 def send(mail_to, subject, content, attachments):
     message = content
-    body = MIMEText(message)
+    body = MIMEText(message, 'plain', 'utf-8')
     msg = MIMEMultipart(message)
     msg.attach(body)
 

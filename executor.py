@@ -1,4 +1,5 @@
 #!/usr/bin/env python 
+#coding:utf-8
 
 import sys
 import utils
@@ -32,7 +33,7 @@ def compute_profits(games):
 		    for p in profits:
 		        print str(p)
 		    if len(profits) > 0:
-		        c = "%s - %s\t%s\t%s - %s\t%s -- %s" % (g1.hostname,str(g1.guestname).decode('utf-8'), str(sp_arra).decode('utf-8'), str(g2.hostname).decode('utf-8'), str(g2.guestname).decode('utf-8'), str(sp_arrb), ' ** '.join([str(profit) for profit in profits]))
+		        c = "%s - %s\t%s\t%s - %s\t%s \n %s" % (str(g1.hostname).decode('utf-8'),str(g1.guestname).decode('utf-8'), str(sp_arra).decode('utf-8'), str(g2.hostname).decode('utf-8'), str(g2.guestname).decode('utf-8'), str(sp_arrb), ' \n '.join([str(profit) for profit in profits]))
 		        catched.append(c)
             if len(catched) > 0:
 	        notifier.notify(catched)
@@ -40,6 +41,9 @@ def compute_profits(games):
 	        return
 	    catched = []
     print "----JOB END --- %s ---" % datetime.now()
+
+def utf8tostr(u):
+    return utils.execute("echo %s" % str(u)) 
 
 if __name__ == '__main__':
     main()
