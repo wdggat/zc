@@ -19,6 +19,12 @@ def _2s1(sps):
     for profit in profits:
         print str(profit)
 
+def _2s1_23(sps):
+    sp_arra, sp_arrb = sps[0:2], sps[2:]
+    profits = zc.get_topN_profit_2s1(sp_arra, sp_arrb, 200, buy_max=20, buy_min=1, check=False)
+    for profit in profits:
+        print str(profit)
+
 def score(sp_arr):
     profits = zc.get_topN_profit(sp_arr, 20, profit_multiple=2,buy_max=4, buy_min=1)
     for profit in profits:
@@ -31,6 +37,8 @@ def main(argv):
         return danchang(sps)
     elif jobname == '2s1':
         return _2s1(sps)
+    elif jobname == '2-3':
+        return _2s1_23(sps)
     elif jobname == 'score':
         return score(sps)
     else:

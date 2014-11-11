@@ -10,14 +10,42 @@ cost: 2 * ( a1 + a2 + ... + an)
 """
 
 import sys
+import argparse
 
-def check(sp_arr):
-    s = sum([ 1 / float(sp) for sp in sp_arr])
+def sum_reciprocal(arr):
+    return  sum([ 1 / float(sp) for sp in arr])
+
+def check(params):
+    sp_arr = params.sps
+    s = sum_reciprocal(sp_arr)
     print 'sp check value: %f' % s
     return s,s <= 1
 
+def check_arr2(params):
+    sp_arra, sp_arrb = params.sp_arra, params.sp_arrb
+    arr = []
+    for i in sp_arra:
+        for j in sp_arrb:
+	    arr.append(float(i) * float(j))
+    s = sum_reciprocal(arr)
+    print 'sp check value: %f' % s
+    return s, s<=1
+
 if __name__=='__main__':
-    sps = [float(i) for i in sys.argv[1:]]
-    s,legal = check(sps)
-    print s,legal
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers()
+    parser_check1 = subparsers.add_parser('s1')
+    parser_check1.add_argument('sps', nargs='+')
+    parser_check1.set_defaults(func=check)
+
+    parser_check2 = subparsers.add_parser('s2')
+    parser_check2.add_argument('-a', dest='sp_arra', nargs = '+')
+    parser_check2.add_argument('-b', dest='sp_arrb', nargs = '+')
+    parser_check2.set_defaults(func=check_arr2)
+
+    args = parser.parse_args()
+    args.func(args)
+#    sps = [float(i) for i in sys.argv[1:]]
+#    s,legal = check(sps)
+#    print s,legal
 

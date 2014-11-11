@@ -10,14 +10,14 @@ class Profit():
 	self.cost = _cost(buy_arr)
         
     def all_positive(self):
-        return all([p > 0 for p in self.profit])
+        return all([p >= 0 for p in self.profit])
 
     def qualified(self):
         neg = 0
 	for p in self.profit:
-	    if p < 5:
+	    if p < 15:
 	        neg += 1
-	return neg <= 10
+	return neg <= 0
 
     def __cmp__(self, other):
 	return self.weight() - other.weight()
@@ -28,7 +28,10 @@ class Profit():
 
     def weight(self):
 	#return (sum(self.profit) - max(self.profit) - min(self.profit)) / self.cost
-	return sum(self.profit) 
+	s = sum(self.profit) 
+	if self.all_positive():
+	    s = s + 100000
+	return s
 
 #    def __getitem__(self, i):
 #        return self.profit[i]

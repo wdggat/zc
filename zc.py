@@ -34,6 +34,15 @@ def _get_all_buyarrs8(buy_max, buy_min):
                                 for a8 in range(buy_min, buy_max+1):
                                     yield [a1,a2,a3,a4,a5,a6,a7,a8]
 
+def _get_all_buyarrs6(buy_max, buy_min):
+    for a1 in range(buy_min, buy_max+1):
+        for a2 in range(buy_min, buy_max+1):
+            for a3 in range(buy_min, buy_max+1):
+                for a4 in range(buy_min, buy_max+1):
+                    for a5 in range(buy_min, buy_max+1):
+                        for a6 in range(buy_min, buy_max+1):
+                            yield [a1,a2,a3,a4,a5,a6]
+
 def _get_all_buyarrs12(buy_max, buy_min):
     for a1 in range(buy_min, buy_max+1):
         for a2 in range(buy_min, buy_max+1):
@@ -57,6 +66,9 @@ def _get_all_buyarrs(buy_max, length, buy_min=0):
 	    yield b
     elif length == 8:
         for b in _get_all_buyarrs8(buy_max, buy_min):
+	    yield b
+    elif length == 6:
+        for b in _get_all_buyarrs6(buy_max, buy_min):
 	    yield b
     elif length == 12:
         for b in _get_all_buyarrs12(buy_max, buy_min):
@@ -90,6 +102,7 @@ def get_topN_profit(sp_arr, topN, profit_multiple=2, buy_max=BUY_MAX, buy_min=0)
 	    print 'c : %d, %s' % (c, datetime.now())
         profit = Profit.get_from_sparr(sp_arr, buy_arr, multiple=profit_multiple)
 	if not profit.qualified():
+        #if not profit.all_positive():
 	    continue
 	else:
 	    profits.append(profit)
@@ -97,8 +110,8 @@ def get_topN_profit(sp_arr, topN, profit_multiple=2, buy_max=BUY_MAX, buy_min=0)
     sorted_profits = sorted(profits, reverse=True)
     return sorted_profits[0:topN]
 
-def get_topN_profit_2s1(sp_arra, sp_arrb, topN, buy_max=BUY_MAX, buy_min=0):
-    if not check_2s1(sp_arra, sp_arrb):
+def get_topN_profit_2s1(sp_arra, sp_arrb, topN, buy_max=BUY_MAX, buy_min=0, check=True):
+    if check and not check_2s1(sp_arra, sp_arrb):
         return []
     sp_arr = []
     for sp_a in sp_arra:
